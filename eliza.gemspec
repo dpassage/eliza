@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Eliza::VERSION
   spec.authors       = ["David Paschich"]
   spec.email         = ["dpassage@balveda.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.summary       = %q{Eliza, the automated psychologist.}
+  spec.description   = %q{Ruby implementation of Eliza, the automated psychologist.}
+  spec.homepage      = "https://github.com/dpassage/eliza"
+  spec.license       = "Apache-2.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
