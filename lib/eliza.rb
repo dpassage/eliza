@@ -123,3 +123,11 @@ class Eliza
     end
     
   end
+
+# Gem template:
+# require "eliza/version"
+
+# module Eliza
+#   # Your code goes here...
+# end
+
