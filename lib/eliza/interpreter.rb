@@ -3,10 +3,13 @@ require 'eliza/script'
 
 module Eliza
   class Interpreter
+    attr_reader :done
+
     def initialize(script_name='/scripts/original.txt')
       @memory = Memory.new
       @memory.save('Oh my gosh, I spilled coffee! Sorry, please continue.')
       @script = Script.new File.dirname(__FILE__)+script_name
+      @done = false
     end
 
     def last_response

@@ -28,6 +28,11 @@ describe Eliza do
         output2 = interpreter.process_input "My car is yellow."
         expect(output1).to_not eq output2
       end
+      it 'sets done to true if the user quits' do
+        output = interpreter.process_input 'quit'
+        expect(output).to include 'Goodbye'
+        expect(interpreter.done).to be_true
+      end
     end
   end
 end

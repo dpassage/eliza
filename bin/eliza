@@ -2,11 +2,11 @@
 #
 # == Synopsis
 #
-# eliza_cli - eliza command line interface
+# eliza - eliza command line interface
 #
 # == Usage
 #
-# eliza_cli [options]
+# eliza [options]
 #
 # -h, --help:
 #    show help
@@ -20,7 +20,7 @@
 
 my_bin    = File.dirname(__FILE__)
 my_lib    = my_bin + '/../lib'
-my_script = my_lib + '/eliza/scripts/original.txt'
+my_script = '/scripts/original.txt'
 
 $: << my_lib
 
@@ -55,4 +55,4 @@ opts.each do |opt, arg|
   end
 end
 
-Eliza.new(scriptName, inputStream, outputStream).run
+Eliza::Eliza.new(scriptName, inputStream, outputStream).run
