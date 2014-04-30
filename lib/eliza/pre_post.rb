@@ -1,10 +1,12 @@
-class PrePost
+module Eliza
+  class PrePost
 
-  attr_reader :src, :dst
-  
-  def initialize(src, dst)
-    @src = src
-    @dst = dst
+    attr_reader :src, :dst
+
+    def initialize(src, dst)
+      @src = src
+      @dst = dst
+    end
+
   end
-  
 end
