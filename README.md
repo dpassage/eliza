@@ -1,5 +1,7 @@
 # Eliza
 
+[![Build Status](https://travis-ci.org/dpassage/eliza.svg?branch=master)](https://travis-ci.org/dpassage/eliza)
+
 This is a ruby implementation of the Eliza chat bot. It was originally
 written by Dave King:
 
