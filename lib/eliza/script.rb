@@ -10,7 +10,6 @@ module Eliza
     attr_reader :final, :keys, :quits
     
     def initialize(inputScript = 'script')
-      puts(system 'pwd')
       @final      = ''
       @initial    = ''
       @keys       = {}
