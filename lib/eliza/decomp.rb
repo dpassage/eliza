@@ -1,6 +1,5 @@
 module Eliza
   class Decomp < Array
-
     attr_accessor :pattern
     attr_reader :mem
 
@@ -11,25 +10,26 @@ module Eliza
       @index   = nil      # locates current reassembly rule
     end
 
-    def nextRule
-      raise "error: no reassembly rules for decomp" unless self.size
-      @index = rand self.size unless @index
-      if (@mem)
-        @index = rand self.size
+    def next_rule
+      fail 'error: no reassembly rules for decomp' unless size
+      @index = rand size unless @index
+      if @mem
+        @index = rand size
       else
         @index += 1
-        @index = 0 unless 0 <= @index and @index < self.size
+        @index = 0 unless 0 <= @index && @index < size
       end
       String.new self[@index]
     end
 
     def inspect
-      "*** Decomp#inspect: @pattern=#@pattern, @mem=#@mem, @index=#@index " + super
+      "*** Decomp#inspect: @pattern=#{@pattern}, " \
+      "@mem=#{@mem}, @index=#{@index} " + super
     end
 
     def to_s
-      "*** Decomp#to_s: @pattern=#@pattern, @mem=#@mem, @index=#@index " + super
+      "*** Decomp#to_s: @pattern=#{@pattern}, " \
+      "@mem=#{@mem}, @index=#{@index} " + super
     end
-
   end
 end

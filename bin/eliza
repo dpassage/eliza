@@ -22,37 +22,36 @@ my_bin    = File.dirname(__FILE__)
 my_lib    = my_bin + '/../lib'
 my_script = '/scripts/original.txt'
 
-$: << my_lib
+$LOAD_PATH << my_lib
 
 require 'eliza'
 require 'getoptlong'
-#require 'rdoc/usage' # missing in 1.9? how annoying...
 
 # set defaults
-inputStream = STDIN
-outputStream = STDOUT
-outputStream.sync = true
-scriptName = my_script
+input_stream = STDIN
+output_stream = STDOUT
+output_stream.sync = true
+script_name = my_script
 
 opts = GetoptLong.new(
-                      [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
-[ '--input', '-i', GetoptLong::REQUIRED_ARGUMENT ],
-[ '--script', '-s', GetoptLong::REQUIRED_ARGUMENT ]
+                      ['--help', '-h', GetoptLong::NO_ARGUMENT],
+                      ['--input', '-i', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--script', '-s', GetoptLong::REQUIRED_ARGUMENT]
 )
 
 opts.each do |opt, arg|
   case opt
   when '--help'
-    puts "usage: eliza_cli [--input=s] [--script=s]"
+    puts 'usage: eliza_cli [--input=s] [--script=s]'
     exit 1
   when '--input'
-    inputStream = File.new(arg)
+    input_stream = File.new(arg)
   when '--script'
-    scriptName = arg
+    script_name = arg
   else
-    puts "error: unexpected input, try --help"
+    puts 'error: unexpected input, try --help'
     exit 1
   end
 end
 
-Eliza::Eliza.new(scriptName, inputStream, outputStream).run
+Eliza::Eliza.new(script_name, input_stream, output_stream).run

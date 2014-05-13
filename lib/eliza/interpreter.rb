@@ -5,10 +5,10 @@ module Eliza
   class Interpreter
     attr_reader :done
 
-    def initialize(script_name='/scripts/original.txt')
+    def initialize(script_name = '/scripts/original.txt')
       @memory = Memory.new
       @memory.save('Oh my gosh, I spilled coffee! Sorry, please continue.')
-      @script = Script.new File.dirname(__FILE__)+script_name
+      @script = Script.new File.dirname(__FILE__) + script_name
       @done = false
     end
 
@@ -16,24 +16,24 @@ module Eliza
       "Hello, I am Dr. Eliza.\nPlease describe your problem.\n"
     end
 
-    def process_input(input)  
+    def process_input(input)
       # Clean up input string, split into sentences.
-      #str = input.tr(',?!', '.').gsub(/[^.'\w]/, ' ').strip.squeeze("\s.")
+      # str = input.tr(',?!', '.').gsub(/[^.'\w]/, ' ').strip.squeeze("\s.")
       str = input.tr(',?!', '.').strip.squeeze("\s.")
       sentences = str.split(/\.\s*/)
-      
+
       # Try each sentence in string.
       sentences.each { |s| (reply = sentence(s)) and return reply }
-      
+
       # No sentence(), pop next FIFO memory, if any.
-       (reply = @memory.get) and return reply
-      
+      (reply = @memory.get) and return reply
+
       # No memory, try processing with xnone key.
       results = {}
       if key = @script.keys['xnone'] then sentences.each { |s|
           decompose(s, key, results) and results['reply'] and return results['reply'] }
-      end      
-      
+      end
+
       # Oh well, just say anything.
       "I am at a loss for words."
     end
@@ -88,7 +88,7 @@ module Eliza
         captures = %Q["#{md_input.captures.join('", "')}"]
         puts %Q{*** assemble "#{decomp.pattern.inspect}" with (#{captures})} 
       end
-      rule = decomp.nextRule
+      rule = decomp.next_rule
       if rule =~ /^goto\s+(\w+)/
         raise "error: unknown key '#{$1}'" unless @script.keys[$1]
         return (results['goto_key'] = @script.keys[$1])

@@ -6,9 +6,8 @@ require 'pp'
 
 module Eliza
   class Script
-    
     attr_reader :final, :keys, :quits
-    
+
     def initialize(inputScript = 'script')
       @final      = ''
       @initial    = ''
@@ -17,23 +16,24 @@ module Eliza
       @pre        = {}
       @quits      = []
       @syns       = {}
-      
+
       parse inputScript
 
       # Regular expressions are harder to setup but later results look prettier
       # than stepping thru and comparing multiple arrays of words and '*'s.
 
       synpat = /@(\w+)/ # synonym notation used in eliza scripts
-      @keys.each_value { |key|
-        key.each { |decomp| # Key is (also) array of Decomp's, maybe too sneaky...
+      @keys.each_value do |key|
+        key.each do |decomp|
+        # Key is (also) array of Decomp's, maybe too sneaky...
           while synpat.match(decomp.pattern)
             expr = @syns[$1] or raise "error: unknown synonym: '#{$1}'."
             decomp.pattern = $` + "(#{expr})" + $'
           end
           #puts "final pattern(#{decomp.pattern})"
           decomp.pattern = /#{decomp.pattern}/i
-        }
-      }
+        end
+      end
     end
     
     def pre_translate(str)
@@ -120,6 +120,6 @@ module Eliza
       }
       words.join ' '
     end
-    
+
   end
 end

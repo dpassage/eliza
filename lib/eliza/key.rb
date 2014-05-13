@@ -3,9 +3,9 @@ module Eliza
     include Comparable
     attr_reader :name, :rank, :index
 
-    def <=>(anOther)
-      comparison = rank <=> anOther.rank
-      comparison = anOther.index <=> index if comparison == 0
+    def <=>(other)
+      comparison = rank <=> other.rank
+      comparison = other.index <=> index if comparison == 0
       return comparison
     end
 

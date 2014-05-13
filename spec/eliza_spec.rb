@@ -15,17 +15,18 @@ describe Eliza do
         expect(interpreter.last_response).to_not be_nil
       end
       it 'first asks you to explain your problem' do
-        expect(interpreter.last_response).to include 'Please describe your problem'
+        expect(interpreter.last_response)
+          .to include 'Please describe your problem'
       end
     end
     describe 'process_input' do
       it 'processes input' do
-        output = interpreter.process_input "This is a sentence."
+        output = interpreter.process_input 'This is a sentence.'
         expect(output).to be_instance_of(String)
       end
       it 'says something different each time' do
-        output1 = interpreter.process_input "This is a sentence."
-        output2 = interpreter.process_input "My car is yellow."
+        output1 = interpreter.process_input 'This is a sentence.'
+        output2 = interpreter.process_input 'My car is yellow.'
         expect(output1).to_not eq output2
       end
       it 'sets done to true if the user quits' do
