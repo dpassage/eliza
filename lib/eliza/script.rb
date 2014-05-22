@@ -78,7 +78,8 @@ module Eliza
 
         when /^\s*decomp:\s*(.*)/
           key or raise "#{@scriptName}(#{$NR}): Error: no key for decomp."
-          pattern = $1.downcase.gsub('**', '*').gsub('*', ' * ').strip.squeeze(' ')
+          pattern = $1.downcase.gsub('**', '*')
+            .gsub('*', ' * ').strip.squeeze(' ')
           # puts "=== before: #{pattern} ==="
           words = pattern.split
           if words[0] == "$"
@@ -86,7 +87,8 @@ module Eliza
           else
             mem = false
           end
-          raise "#{@scriptName}(#{$NR}): error: empty decomp!" if words.size == 0
+          raise "#{@scriptName}(#{$NR}): " +
+                "error: empty decomp!" if words.size == 0
           pattern = ''
           words.each_index do |i|
             if words[i] == '*'
@@ -106,7 +108,8 @@ module Eliza
           key.push(decomp = Decomp.new(pattern, mem))
 
         when /^\s*reasmb:(.*)/
-          decomp or raise "#{@scriptName}(#{$NR}): Error: no decomp for reasmb!"
+          decomp or raise "#{@scriptName}(#{$NR}): " +
+                          "Error: no decomp for reasmb!"
           decomp.push $1.strip
 
         else

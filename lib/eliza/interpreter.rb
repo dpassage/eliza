@@ -30,8 +30,11 @@ module Eliza
 
       # No memory, try processing with xnone key.
       results = {}
-      if key = @script.keys['xnone'] then sentences.each { |s|
-          decompose(s, key, results) and results['reply'] and return results['reply'] }
+      if key = @script.keys['xnone'] then sentences.each do |s|
+          decompose(s, key, results) and
+            results['reply'] and
+            return results['reply']
+        end
       end
 
       # Oh well, just say anything.
