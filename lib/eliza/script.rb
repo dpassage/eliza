@@ -77,7 +77,7 @@ module Eliza
           decomp = nil
 
         when /^\s*decomp:\s*(.*)/
-          key or raise "#@scriptName(#$.): Error: no key for decomp."
+          key or raise "#{@scriptName}(#{$.}): Error: no key for decomp."
           pattern = $1.downcase.gsub('**', '*').gsub('*', ' * ').strip.squeeze(' ')
           # puts "=== before: #{pattern} ==="
           words = pattern.split
@@ -106,11 +106,11 @@ module Eliza
           key.push(decomp = Decomp.new(pattern, mem))
 
         when /^\s*reasmb:(.*)/
-          decomp or raise "#@scriptName($.): Error: no decomp for reasmb!"
+          decomp or raise "#{@scriptName}(#{$.}): Error: no decomp for reasmb!"
           decomp.push $1.strip
 
         else
-          $stderr << "Unrecognized script input, line #$.: #{line}\n"
+          $stderr << "Unrecognized script input, line #{$.}: #{line}\n"
         end
       end
     end

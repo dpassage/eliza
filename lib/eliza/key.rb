@@ -17,11 +17,11 @@ module Eliza
     end
 
     def inspect
-      "*** Key#inspect: @name=#@name, @rank=#@rank, @index=#@index " + super
+      "*** Key#inspect: @name=#{@name}, @rank=#{@rank}, @index=#{@index} " + super
     end
 
     def to_s
-      "*** Key#to_s: @name=#@name, @rank=#@rank, @index=#@index " + super
+      "*** Key#to_s: @name=#{@name}, @rank=#{@rank}, @index=#{@index} " + super
     end
 
   end
