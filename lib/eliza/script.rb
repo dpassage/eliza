@@ -82,13 +82,13 @@ module Eliza
             .gsub('*', ' * ').strip.squeeze(' ')
           # puts "=== before: #{pattern} ==="
           words = pattern.split
-          if words[0] == "$"
+          if words[0] == '$'
             mem = true; words.shift
           else
             mem = false
           end
           raise "#{@scriptName}(#{$NR}): " +
-                "error: empty decomp!" if words.size == 0
+                'error: empty decomp!' if words.size == 0
           pattern = ''
           words.each_index do |i|
             if words[i] == '*'
@@ -109,7 +109,7 @@ module Eliza
 
         when /^\s*reasmb:(.*)/
           decomp or raise "#{@scriptName}(#{$NR}): " +
-                          "Error: no decomp for reasmb!"
+                          'Error: no decomp for reasmb!'
           decomp.push $1.strip
 
         else

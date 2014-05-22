@@ -38,7 +38,7 @@ module Eliza
       end
 
       # Oh well, just say anything.
-      "I am at a loss for words."
+      'I am at a loss for words.'
     end
     
     def sentence(s)
