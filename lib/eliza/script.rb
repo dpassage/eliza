@@ -27,7 +27,7 @@ module Eliza
         key.each do |decomp|
         # Key is (also) array of Decomp's, maybe too sneaky...
           while synpat.match(decomp.pattern)
-            expr = @syns[$1] or raise "error: unknown synonym: '#{$1}'."
+            (expr = @syns[$1]) || (fail "error: unknown synonym: '#{$1}'.")
             decomp.pattern = $` + "(#{expr})" + $'
           end
           # puts "final pattern(#{decomp.pattern})"
@@ -46,6 +46,7 @@ module Eliza
 
     private
 
+    # rubocop:disable CyclomaticComplexity
     def parse(inputScript)
       key, decomp = nil
 
@@ -77,17 +78,18 @@ module Eliza
           decomp = nil
 
         when /^\s*decomp:\s*(.*)/
-          key or raise "#{@scriptName}(#{$NR}): Error: no key for decomp."
+          key || (fail "#{@scriptName}(#{$NR}): Error: no key for decomp.")
           pattern = $1.downcase.gsub('**', '*')
             .gsub('*', ' * ').strip.squeeze(' ')
           # puts "=== before: #{pattern} ==="
           words = pattern.split
           if words[0] == '$'
-            mem = true; words.shift
+            mem = true
+            words.shift
           else
             mem = false
           end
-          raise "#{@scriptName}(#{$NR}): " +
+          fail "#{@scriptName}(#{$NR}): " \
                 'error: empty decomp!' if words.size == 0
           pattern = ''
           words.each_index do |i|
@@ -101,15 +103,15 @@ module Eliza
               end
             else # words[i] != '*'
               pattern += words[i]
-              pattern += ' ' if i < words.size - 1 and words[i+1] != '*'
+              pattern += ' ' if (i < words.size - 1) && (words[i + 1] != '*')
             end
           end
           # puts "=== after: #{pattern} ==="
           key.push(decomp = Decomp.new(pattern, mem))
 
         when /^\s*reasmb:(.*)/
-          decomp or raise "#{@scriptName}(#{$NR}): " +
-                          'Error: no decomp for reasmb!'
+          decomp || (fail "#{@scriptName}(#{$NR}): " \
+                          'Error: no decomp for reasmb!')
           decomp.push $1.strip
 
         else
@@ -117,6 +119,7 @@ module Eliza
         end
       end
     end
+    # rubocop:enable CyclomaticComplexity
 
     def translate(map, str)
       (words = str.split).each_index do |i|

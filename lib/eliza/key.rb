@@ -6,7 +6,7 @@ module Eliza
     def <=>(other)
       comparison = rank <=> other.rank
       comparison = other.index <=> index if comparison == 0
-      return comparison
+      comparison
     end
 
     def initialize(name = nil, rank = 0, index = 0)
@@ -25,6 +25,5 @@ module Eliza
       "*** Key#to_s: @name=#{@name}, @rank=#{@rank}, @index=#{@index} " +
         super
     end
-
   end
 end
