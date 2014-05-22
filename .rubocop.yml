@@ -4,14 +4,10 @@ MethodLength:
 Documentation:
   Enabled: false
 
+PerlBackrefs:
+  Enabled: false
+
 AllCops:
   Include:
     - Rakefile
-    - config.ru
-  Exclude:
-    - script/**/*
-    - db/**/*
-    - config/**/*
-    - tmp/**/*
-    - log/**/*
-    - spec/spec_helper.rb
+    - eliza.gemspec
