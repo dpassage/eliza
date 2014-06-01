@@ -1,2 +1,1 @@
-require 'pry'
 require 'eliza'

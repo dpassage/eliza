@@ -32,7 +32,7 @@ describe Eliza do
       it 'sets done to true if the user quits' do
         output = interpreter.process_input 'quit'
         expect(output).to include 'Goodbye'
-        expect(interpreter.done).to be_true
+        expect(interpreter.done).to be_truthy
       end
     end
   end
